@@ -1,76 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth bg-[#0A0A0A]">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Terms of Service | Verdaunt</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        background: '#0A0A0A',
-                        surface: '#111111',
-                        border: '#222222',
-                        textMain: '#EDEDED',
-                        textMuted: '#888888',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { background-color: #0A0A0A; color: #EDEDED; font-family: system-ui, sans-serif; }
-    </style>
-</head>
-<body class="selection:bg-[#059669] selection:text-white">
-    <header class="w-full z-40 bg-background border-b border-border">
-        <div class="max-w-7xl mx-auto px-6 h-16 flex items-center">
-            <a href="/" class="flex items-center gap-2 group">
-                <svg width="24" height="24" viewBox="0 0 100 100" class="text-textMain group-hover:text-[#059669] transition-colors">
-                    <path d="M20 25 L50 75 L80 25 L68 25 L50 55 L32 25 Z" fill="currentColor"/>
-                </svg>
-                <span class="font-semibold tracking-tight text-textMain">Verdaunt</span>
-            </a>
-            <div class="ml-auto">
-                <a href="/" class="text-sm font-medium text-textMuted hover:text-textMain transition-colors">&larr; Back to Home</a>
-            </div>
-        </div>
-    </header>
-
-    <main class="py-24">
-        <div class="max-w-3xl mx-auto px-6">
-            <h1 class="text-4xl font-semibold mb-8 text-textMain">Terms of Service</h1>
-            <p class="text-textMuted mb-8">Effective Date: October 2026</p>
-            
-            <div class="space-y-8 text-textMuted leading-relaxed">
-                <section>
-                    <h2 class="text-xl font-medium text-textMain mb-4">1. Acceptance of Terms</h2>
-                    <p>By accessing or using the Verdaunt platform, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
-                </section>
-                
-                <section>
-                    <h2 class="text-xl font-medium text-textMain mb-4">2. Description of Service</h2>
-                    <p>Verdaunt provides financial tooling, bookkeeping, invoicing, and receipt OCR for social commerce businesses. We provide read-only data aggregation and do not hold, move, or process customer funds directly.</p>
-                </section>
-
-                <section>
-                    <h2 class="text-xl font-medium text-textMain mb-4">3. User Obligations</h2>
-                    <p>You agree to provide accurate information when integrating your financial and social media accounts. You are responsible for maintaining the security of your account credentials.</p>
-                </section>
-
-                <section>
-                    <h2 class="text-xl font-medium text-textMain mb-4">4. Limitation of Liability</h2>
-                    <p>Verdaunt shall not be liable for any indirect, incidental, special, consequential or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly, resulting from your use of the service.</p>
-                </section>
-
-                <section>
-                    <h2 class="text-xl font-medium text-textMain mb-4">5. Contact Information</h2>
-                    <p>If you have any questions regarding these Terms, you may contact us at <a href="mailto:hq@verdaunt.com.ng" class="text-textMain hover:underline">hq@verdaunt.com.ng</a>.</p>
-                </section>
-            </div>
-        </div>
-    </main>
-</body>
+    <meta name="description" content="Terms that govern use of the Verdaunt platform." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/terms-main.tsx"></script>
+  </body>
 </html>
