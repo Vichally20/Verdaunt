@@ -18,7 +18,7 @@ export function SiteFooter() {
               <span className="font-semibold text-white">Verdaunt</span>
             </a>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-              The financial infrastructure for the next generation of social commerce.
+              Operational infrastructure for Nigerian merchants selling through Social Media.
             </p>
           </div>
 

@@ -1,35 +1,38 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react'
+import { Logo } from '../components/Logo'
 import { submitWaitlistEmail, useWaitlist } from '../components/Waitlist'
 import { usePrefersReducedMotion } from '../lib/useInView'
 import { DmThread } from '../sections/DmThread'
 import { Ledger } from '../sections/Ledger'
 
-const rotations = ['AI in the DM', 'Payment logged', 'Receipt issued']
+const rotations = ['AI in the DM', 'Payment to order match', 'Receipt issued']
 
 const workflow = [
-  ['Customer messages you', 'On WhatsApp, Instagram, Facebook, or SMS. It lands in one inbox.'],
-  ['AI replies in the chat', 'It answers from your stock and prices, then sends a payment link.'],
-  ['The payment is logged', 'When the money arrives, Verdaunt records it against that order.'],
-  ['Inventory and the account match', 'Stock drops, and the sale is reconciled to the bank on its own.'],
-  ['The receipt goes back', 'After the transaction, the receipt is issued into the same chat.'],
+  ['A Customer messages you', 'Enquiries from WhatsApp, Instagram and others arrive in one inbox.'],
+  ['Verdaunt replies in the chat', 'AI answers using your approved products, prices, and stock.'],
+  ['The order is created', 'The customer selects a product and receives a payment link.'],
+  ['Payment and stock are updated', 'Verdaunt records payment, adjusts inventory and reconcilate account.'],
+  ['The receipt is issued.', 'The customer receives confirmation in the same conversation.'],
 ]
 
-const shopRuns = [
+const pillars = [
   {
-    title: 'Voice bookkeeping',
-    body: 'Say the sale or the expense out loud. Verdaunt writes it into the books, so you are not typing receipts at the end of the day.',
+    title: 'Sell from the chat',
+    items: ['AI replies', 'Product catalogue', 'Payment links', 'One inbox', 'Abandoned-cart follow-up'],
   },
   {
-    title: 'Inventory management',
-    body: 'Every product and variant has a count. A sale in any chat, on the site, or in another shop takes it down in the same place.',
+    title: 'Keep the books current',
+    items: [
+      'Payment records',
+      'Inventory updates',
+      'Receipts',
+      'Sales ledger',
+      'Bank reconciliation, when the account is connected',
+    ],
   },
   {
-    title: 'One inbox',
-    body: 'WhatsApp, Instagram, Facebook, and SMS sit in a single inbox. You see the conversation, the order, and whether they have paid.',
-  },
-  {
-    title: 'A subaccount for each shop',
-    body: 'Run more than one shop from one login. Each shop keeps its own stock, chats, and books.',
+    title: 'Keep customers coming back',
+    items: ['Order updates', 'Repeat-purchase reminders', 'Loyalty', 'Referrals', 'Customer history'],
   },
 ]
 
@@ -70,16 +73,15 @@ export function HomePage() {
         <div className="relative mx-auto max-w-6xl">
           <h1 className="max-w-4xl text-[2.75rem] leading-[1.02] font-semibold tracking-[-0.045em] text-mist md:text-[4.25rem]">
             <span className="sr-only">
-              From the customer DM to the receipt. AI replies, the payment link goes out, and the receipt comes back.
+              {/* From the customer DM to the receipt. AI replies, the payment link goes out, and the receipt comes back. */}
             </span>
             <span aria-hidden="true" className="block">
-              From the DM to the receipt
+            Turn every customer DM into a completed sale.
             </span>
             <HeroRotator />
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
-            A customer messages you. Verdaunt replies in the chat, sends a payment link, logs the money, updates
-            inventory, and issues the receipt after the transaction.
+          Built for Nigerian merchants selling through WhatsApp and Instagram.
           </p>
           <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <HeroEmail id="hero-email" />
@@ -111,10 +113,12 @@ export function HomePage() {
           </ol>
         </section>
 
-        <section id="product" className="mx-auto max-w-6xl px-5 pb-20">
-          <div className="space-y-16">
+        <section id="product" className="mx-auto max-w-6xl px-5 py-20">
+          <p className="text-sm font-semibold tracking-[0.16em] text-muted uppercase">Core benefits</p>
+          <div className="mt-12 space-y-16">
             <div id="ai">
               <Shot
+                copyFirst
                 title="AI in the DM"
                 body="The AI reads the message, checks what you have in stock, and answers in the chat. It can take the order without you typing a reply."
               >
@@ -122,16 +126,18 @@ export function HomePage() {
               </Shot>
             </div>
             <Shot
+              copyFirst
               title="The payment link, then the receipt"
               body="A payment link goes out in the same conversation. When the customer pays, Verdaunt logs it and issues the receipt back into the chat."
             >
-              <div className="grid items-start gap-4 md:grid-cols-2">
+              <div className="grid items-center gap-4 md:grid-cols-2">
                 <ChatInvoice />
                 <ReceiptCard />
               </div>
             </Shot>
             <div id="inventory">
               <Shot
+                copyFirst
                 title="Inventory reconciles with the account"
                 body="The sale that just happened in chat is the same sale on your stock count and on your bank. You do not enter it twice."
               >
@@ -146,11 +152,15 @@ export function HomePage() {
             <h2 className="max-w-3xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
               The shop keeps running after the sale.
             </h2>
-            <div className="mt-12 grid gap-4 md:grid-cols-2">
-              {shopRuns.map((item) => (
-                <article key={item.title} className="rounded-3xl bg-white p-6">
-                  <h3 className="text-2xl font-semibold tracking-tight">{item.title}</h3>
-                  <p className="mt-3 leading-relaxed text-muted">{item.body}</p>
+            <div className="mt-12 grid gap-4 md:grid-cols-3">
+              {pillars.map((pillar) => (
+                <article key={pillar.title} className="rounded-3xl bg-white p-6">
+                  <h3 className="text-2xl font-semibold tracking-tight">{pillar.title}</h3>
+                  <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted">
+                    {pillar.items.map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
                 </article>
               ))}
             </div>
@@ -188,50 +198,14 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="marketing" className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-5 py-20">
-            <h2 className="max-w-3xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
-              Bring the customer back, and keep the ones who almost paid.
-            </h2>
-            <div className="mt-12 grid gap-4 md:grid-cols-2">
-              <article className="rounded-3xl bg-sand p-6">
-                <h3 className="text-2xl font-semibold tracking-tight">Loyalty, rewards, and referrals</h3>
-                <p className="mt-3 leading-relaxed text-muted">
-                  Points for repeat buyers, a reward they can spend, and a referral they can send to a friend. Verdaunt
-                  tracks who came back and who they brought.
-                </p>
-              </article>
-              <article className="rounded-3xl bg-night p-6 text-mist">
-                <h3 className="text-2xl font-semibold tracking-tight">Abandoned carts get a follow-up</h3>
-                <p className="mt-3 leading-relaxed text-white/70">
-                  Someone added items and went quiet. Verdaunt messages them in the channel they used, with the payment
-                  link still on the order, so the sale is not lost.
-                </p>
-                <p className="mt-6 rounded-2xl bg-white/10 px-4 py-3 text-sm">
-                  “You left 2 dresses in the bag. Pay here and we’ll send them today.”
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
         <section className="border-t border-line">
           <div className="mx-auto max-w-6xl px-5 py-20">
             <h2 className="max-w-2xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
               Shops stay in the chat. Verdaunt finishes the sale.
             </h2>
-            <div className="mt-12 grid gap-10 md:grid-cols-2">
-              <Quote
-                quote="Before Verdaunt, I spent my Sunday evenings matching bank alerts to Instagram DMs. Now, it happens instantly while I sleep."
-                name="Sarah Jenkins"
-                role="Founder, Aura Apparel"
-              />
-              <Quote
-                quote="The WhatsApp invoices are a game changer. Customers see the total, click the link, and pay. When the payment hits, Verdaunt logs it as revenue."
-                name="David Chen"
-                role="Owner, Kismet Supply"
-              />
-            </div>
+            <p className="mt-8 max-w-2xl text-2xl leading-snug font-medium tracking-tight">
+              Built with feedback from Nigerian merchants selling through WhatsApp and Instagram.
+            </p>
           </div>
         </section>
 
@@ -347,63 +321,158 @@ function HeroEmail({ id }: { id: string }) {
   )
 }
 
-function Shot({ title, body, children }: { title: string; body: string; children: ReactNode }) {
+function Shot({
+  title,
+  body,
+  children,
+  copyFirst = false,
+}: {
+  title: string
+  body: string
+  children: ReactNode
+  copyFirst?: boolean
+}) {
+  const copy = (
+    <>
+      <h3 className={`text-3xl font-semibold tracking-tight ${copyFirst ? '' : 'mt-6'}`}>{title}</h3>
+      <p className="mt-2 max-w-2xl text-lg leading-relaxed text-muted">{body}</p>
+    </>
+  )
+  const frame = <div className={`rounded-[28px] bg-sand p-4 md:p-8 ${copyFirst ? 'mt-6' : ''}`}>{children}</div>
   return (
     <div>
-      <div className="rounded-[28px] bg-sand p-4 md:p-8">{children}</div>
-      <h3 className="mt-6 text-3xl font-semibold tracking-tight">{title}</h3>
-      <p className="mt-2 max-w-2xl text-lg leading-relaxed text-muted">{body}</p>
+      {copyFirst ? copy : null}
+      {frame}
+      {copyFirst ? null : copy}
     </div>
   )
 }
 
+const receiptLines = [
+  ['Ankara, 6 yards', '₦28,000'],
+  ['Lace, 5 yards', '₦18,500'],
+  ['Aso-oke cap', '₦7,500'],
+  ['Delivery to Lekki', '₦3,000'],
+]
+
 function ReceiptCard() {
   return (
     <div className="mx-auto max-w-sm rounded-3xl bg-white p-6 shadow-sm">
-      <p className="text-center text-lg font-semibold">Lekki Textiles</p>
+      <div
+        className="flex h-8 w-8 items-center justify-center rounded-lg bg-lime text-night"
+        role="img"
+        aria-label="Verdaunt"
+      >
+        <Logo />
+      </div>
+      <p className="mt-3 text-center text-lg font-semibold">Lekki Textiles</p>
       <p className="text-center text-xs text-muted">Supplier receipt · extracted</p>
+      <p className="mt-4 text-center text-sm">
+        <span className="text-muted">Buyer · </span>Amaka Okeke
+      </p>
       <dl className="mt-5 space-y-2 text-sm">
-        <div className="flex justify-between gap-4">
-          <dt>Ankara, 6 yards</dt>
-          <dd>₦28,000</dd>
-        </div>
+        {receiptLines.map(([item, price]) => (
+          <div key={item} className="flex justify-between gap-4">
+            <dt>{item}</dt>
+            <dd>{price}</dd>
+          </div>
+        ))}
         <div className="flex justify-between gap-4 rounded-xl bg-lime/40 px-2 py-1">
           <dt>VAT</dt>
           <dd>₦2,100</dd>
         </div>
         <div className="flex justify-between gap-4 border-t border-line pt-2 font-semibold">
           <dt>Total</dt>
-          <dd>₦30,100</dd>
+          <dd>₦59,100</dd>
         </div>
       </dl>
     </div>
   )
 }
 
+const transferAccount = '0123456789'
+const invoiceAmount = '₦145,000'
+
 function ChatInvoice() {
+  const [method, setMethod] = useState<'transfer' | 'link'>('transfer')
+  const [copied, setCopied] = useState(false)
+
+  async function copyAccount() {
+    try {
+      await navigator.clipboard.writeText(transferAccount)
+      setCopied(true)
+      window.setTimeout(() => setCopied(false), 1500)
+    } catch {
+      setCopied(false)
+    }
+  }
+
   return (
     <div className="mx-auto w-full max-w-sm rounded-[28px] bg-white p-5 shadow-sm">
-      <p className="text-xs font-semibold tracking-[0.16em] text-muted uppercase">WhatsApp</p>
-      <div className="mt-4 max-w-[90%] rounded-2xl rounded-bl-md bg-sand px-4 py-3 text-sm leading-relaxed">
-        Hey! Here is the invoice for the 3 dresses. You can pay directly via this link.
+      <div className="grid grid-cols-2 rounded-full bg-sand p-1 text-sm font-medium">
+        <button
+          type="button"
+          onClick={() => setMethod('transfer')}
+          aria-pressed={method === 'transfer'}
+          className={`rounded-full px-3 py-2 ${method === 'transfer' ? 'bg-night text-white' : 'text-muted'}`}
+        >
+          Transfer
+        </button>
+        <button
+          type="button"
+          onClick={() => setMethod('link')}
+          aria-pressed={method === 'link'}
+          className={`rounded-full px-3 py-2 ${method === 'link' ? 'bg-night text-white' : 'text-muted'}`}
+        >
+          Payment link
+        </button>
       </div>
-      <div className="mt-3 ml-8 rounded-2xl rounded-br-md bg-night px-4 py-4 text-mist">
-        <p className="text-[11px] tracking-[0.16em] text-lime uppercase">Verdaunt invoice</p>
-        <p className="mt-1 text-3xl font-semibold">₦145,000</p>
-        <p className="mt-3 rounded-full bg-white py-2 text-center text-sm font-medium text-night">Pay now</p>
-      </div>
+      {method === 'transfer' ? (
+        <div className="mt-4 rounded-2xl bg-night px-4 py-4 text-mist">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-lime text-night" role="img" aria-label="Verdaunt">
+            <Logo />
+          </div>
+          <p className="mt-3 text-3xl font-semibold">{invoiceAmount}</p>
+          <div className="mt-4 flex items-center justify-between gap-3">
+            <div>
+              <p className="text-[11px] tracking-[0.16em] text-lime uppercase">GTBank</p>
+              <p className="mt-1 font-mono text-lg font-semibold tracking-wide">{transferAccount}</p>
+            </div>
+            <button
+              type="button"
+              onClick={copyAccount}
+              aria-label={copied ? 'Account number copied' : 'Copy account number'}
+              className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white/10 text-white"
+            >
+              {copied ? <CheckIcon /> : <CopyIcon />}
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="mt-4 rounded-2xl bg-night px-4 py-4 text-mist">
+          <p className="text-[11px] tracking-[0.16em] text-lime uppercase">Lekki Textiles Invoice</p>
+          <p className="mt-1 text-3xl font-semibold">{invoiceAmount}</p>
+          <p className="mt-3 rounded-full bg-white py-2 text-center text-sm font-medium text-night">Pay now</p>
+        </div>
+      )}
     </div>
   )
 }
 
-function Quote({ quote, name, role }: { quote: string; name: string; role: string }) {
+function CopyIcon() {
   return (
-    <figure>
-      <blockquote className="text-2xl leading-snug font-medium tracking-tight">“{quote}”</blockquote>
-      <figcaption className="mt-5 text-sm text-muted">
-        <span className="font-medium text-ink">{name}</span> · {role}
-      </figcaption>
-    </figure>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <rect x="8" y="8" width="12" height="12" rx="2" />
+      <path d="M4 16V6a2 2 0 0 1 2-2h10" />
+    </svg>
+  )
+}
+
+function CheckIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" aria-hidden="true">
+      <path d="M5 12.5 10 17.5 19 7.5" />
+    </svg>
   )
 }
 

@@ -80,6 +80,32 @@ body {
   animation: rise 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+@keyframes notify-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-130%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notify-drop {
+  animation: notify-drop 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes notify-leave {
+  to {
+    opacity: 0;
+    transform: translateY(-130%);
+  }
+}
+
+.notify-leave {
+  animation: notify-leave 0.4s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
 details > summary {
   list-style: none;
 }
@@ -95,6 +121,8 @@ details > summary::-webkit-details-marker {
 
   .reveal,
   .rise,
+  .notify-drop,
+  .notify-leave,
   .rotator-track {
     opacity: 1;
     transform: none;

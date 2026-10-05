@@ -24,14 +24,14 @@
     "semantic_hash": ""
   },
   "src/components/SiteFooter.tsx": {
-    "mtime": 1791179266.4790237,
-    "seen": 1791179359.641029,
-    "ast_hash": "9ab1bb2926e1a84a3c680df73920a6ee",
+    "mtime": 1791231472.4770522,
+    "seen": 1791234782.2497525,
+    "ast_hash": "c256ff1348448e2aa7f11fe1881ed07e",
     "semantic_hash": ""
   },
   "src/components/SiteHeader.tsx": {
-    "mtime": 1791179266.434096,
-    "seen": 1791179359.641029,
+    "mtime": 1791198370.9574513,
+    "seen": 1791227706.991143,
     "ast_hash": "9455f36ad21c136f503ea07151e78ee5",
     "semantic_hash": ""
   },
@@ -60,9 +60,9 @@
     "semantic_hash": ""
   },
   "src/pages/HomePage.tsx": {
-    "mtime": 1791179319.04609,
-    "seen": 1791179359.641029,
-    "ast_hash": "117cd99363be1463431d2025a90f443d",
+    "mtime": 1791239012.1754656,
+    "seen": 1791239021.7960863,
+    "ast_hash": "3cf9e400963853ff26e69e44d4d1afc7",
     "semantic_hash": ""
   },
   "src/pages/LegalLayout.tsx": {
@@ -78,9 +78,9 @@
     "semantic_hash": ""
   },
   "src/sections/DmThread.tsx": {
-    "mtime": 1791178053.025751,
-    "seen": 1791178250.9913023,
-    "ast_hash": "afa0d0de62ba31aaa76be2c17cc826de",
+    "mtime": 1791229041.184072,
+    "seen": 1791229048.630523,
+    "ast_hash": "382ee6548488b703e956d17033d9b9f9",
     "semantic_hash": ""
   },
   "src/sections/Ledger.tsx": {
@@ -126,9 +126,9 @@
     "semantic_hash": ""
   },
   "index.html": {
-    "mtime": 1791179266.4382136,
-    "seen": 1791179359.641029,
-    "ast_hash": "82840e6b7754c2c525a192a247d59bd6",
+    "mtime": 1791200808.7997217,
+    "seen": 1791227706.991143,
+    "ast_hash": "5e015076ca43bf52757f2842d8bfac4a",
     "semantic_hash": ""
   },
   "privacy.html": {

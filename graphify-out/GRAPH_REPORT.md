@@ -1,17 +1,17 @@
 # Graph Report - Verdaunt  (2026-10-05)
 
 ## Corpus Check
-- 21 files · ~4,728 words
+- 21 files · ~5,030 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 2 file(s) not represented in the graph (top: (none) 1, .css 1)
+- Unclassified: 3 file(s) not represented in the graph (top: (none) 1, .toml 1, .css 1)
 
 ## Summary
-- 122 nodes · 184 edges · 10 communities (8 shown, 2 thin omitted)
+- 126 nodes · 190 edges · 10 communities (8 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2200ca76`
+- Built from commit: `39c160bb`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -80,30 +80,32 @@ Cohesion: 0.28
 Nodes (8): submitWaitlistEmail(), WaitlistContext, WaitlistContextValue, WaitlistDialog(), onSubmit(), WaitlistProvider(), HeroEmail(), onSubmit()
 
 ### Community 6 - "HomePage.tsx"
-Cohesion: 0.16
-Nodes (12): naira(), useInView(), usePrefersReducedMotion(), faqs, HeroRotator(), HomePage(), rotations, shopRuns (+4 more)
+Cohesion: 0.12
+Nodes (14): naira(), useInView(), usePrefersReducedMotion(), ChatInvoice(), faqs, HeroRotator(), HomePage(), pillars (+6 more)
 
 ### Community 7 - "devDependencies"
 Cohesion: 0.25
 Nodes (8): devDependencies, tailwindcss, @tailwindcss/vite, @types/react, @types/react-dom, typescript, vite, @vitejs/plugin-react
 
 ## Knowledge Gaps
-- **58 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+53 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 69 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **59 isolated node(s):** `name`, `private`, `version`, `type`, `dev` (+54 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 72 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `react` connect `react` to `package.json`, `SiteFooter.tsx`, `Waitlist.tsx`, `HomePage.tsx`?**
-  _High betweenness centrality (0.276) - this node is a cross-community bridge._
+  _High betweenness centrality (0.277) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `devDependencies` to `package.json`?**
-  _High betweenness centrality (0.079) - this node is a cross-community bridge._
+  _High betweenness centrality (0.078) - this node is a cross-community bridge._
 - **What connects `name`, `private`, `version` to the rest of the system?**
-  _58 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _59 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `package.json` be split into smaller, more focused modules?**
   _Cohesion score 0.09486166007905138 - nodes in this community are weakly interconnected._
 - **Should `compilerOptions` be split into smaller, more focused modules?**
   _Cohesion score 0.11764705882352941 - nodes in this community are weakly interconnected._
 - **Should `compilerOptions` be split into smaller, more focused modules?**
   _Cohesion score 0.14285714285714285 - nodes in this community are weakly interconnected._
+- **Should `HomePage.tsx` be split into smaller, more focused modules?**
+  _Cohesion score 0.12307692307692308 - nodes in this community are weakly interconnected._
