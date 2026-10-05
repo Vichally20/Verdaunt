@@ -1,7 +1,7 @@
 # Graph Report - Verdaunt  (2026-10-05)
 
 ## Corpus Check
-- 21 files · ~4,417 words
+- 21 files · ~4,728 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 2 file(s) not represented in the graph (top: (none) 1, .css 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `66ee3f16`
+- Built from commit: `2200ca76`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -81,7 +81,7 @@ Nodes (8): submitWaitlistEmail(), WaitlistContext, WaitlistContextValue, Waitlis
 
 ### Community 6 - "HomePage.tsx"
 Cohesion: 0.16
-Nodes (12): naira(), useInView(), usePrefersReducedMotion(), capabilities, faqs, HeroRotator(), HomePage(), rotations (+4 more)
+Nodes (12): naira(), useInView(), usePrefersReducedMotion(), faqs, HeroRotator(), HomePage(), rotations, shopRuns (+4 more)
 
 ### Community 7 - "devDependencies"
 Cohesion: 0.25

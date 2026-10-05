@@ -4,8 +4,8 @@ import { homeHref } from '../lib/links'
 import { useWaitlist } from './Waitlist'
 
 const links = [
+  { label: 'How it works', hash: '#workflow' },
   { label: 'Features', hash: '#features' },
-  { label: 'Product', hash: '#product' },
 ]
 
 export function SiteHeader() {

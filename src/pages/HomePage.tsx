@@ -4,40 +4,61 @@ import { usePrefersReducedMotion } from '../lib/useInView'
 import { DmThread } from '../sections/DmThread'
 import { Ledger } from '../sections/Ledger'
 
-const rotations = ['In your DMs', 'On the ledger', 'At tax time']
+const rotations = ['AI in the DM', 'Payment logged', 'Receipt issued']
 
-const capabilities = [
-  ['Zero-touch categorization', 'Transactions land in tax-compliant ledgers on their own.'],
-  ['Real-time P&L', 'Profit updates with every sale and every expense.'],
-  ['Bank-grade security', 'Read-only bank access. We never move your funds.'],
-  ['Multi-currency', 'Take payment anywhere and reconcile in naira.'],
-  ['Tax export', 'One click, then hand a clean file to your accountant.'],
-  ['Omnichannel sync', 'A sale in any chat locks stock everywhere else.'],
-  ['FIRS tax grouping', 'Taxes grouped for TaxPro Max, with supplier landed costs.'],
-  ['Receipt OCR', 'A photo or a forwarded email becomes a logged expense.'],
-  ['Chat invoices', 'A payment link that renders inside WhatsApp and Instagram.'],
+const workflow = [
+  ['Customer messages you', 'On WhatsApp, Instagram, Facebook, or SMS. It lands in one inbox.'],
+  ['AI replies in the chat', 'It answers from your stock and prices, then sends a payment link.'],
+  ['The payment is logged', 'When the money arrives, Verdaunt records it against that order.'],
+  ['Inventory and the account match', 'Stock drops, and the sale is reconciled to the bank on its own.'],
+  ['The receipt goes back', 'After the transaction, the receipt is issued into the same chat.'],
+]
+
+const shopRuns = [
+  {
+    title: 'Voice bookkeeping',
+    body: 'Say the sale or the expense out loud. Verdaunt writes it into the books, so you are not typing receipts at the end of the day.',
+  },
+  {
+    title: 'Inventory management',
+    body: 'Every product and variant has a count. A sale in any chat, on the site, or in another shop takes it down in the same place.',
+  },
+  {
+    title: 'One inbox',
+    body: 'WhatsApp, Instagram, Facebook, and SMS sit in a single inbox. You see the conversation, the order, and whether they have paid.',
+  },
+  {
+    title: 'A subaccount for each shop',
+    body: 'Run more than one shop from one login. Each shop keeps its own stock, chats, and books.',
+  },
 ]
 
 const faqs = [
   {
-    q: 'Does Verdaunt replace my accountant?',
-    a: 'No. Verdaunt acts as an automated bookkeeper. We organize your raw data, automate the categorization, and prepare tax-ready exports. Your accountant will love us, as we hand them perfectly reconciled data.',
+    q: 'What does Verdaunt actually do?',
+    a: 'A customer messages you. Verdaunt’s AI replies in the DM, sends a payment link, logs the payment, updates inventory, reconciles it to your account, and issues the receipt back into the chat.',
   },
   {
-    q: 'Which banks do you support?',
-    a: 'We integrate with over 5,000 global financial institutions via open banking protocols (Plaid, Tink, Mono). If you have an online bank account, chances are we support it.',
+    q: 'Does the AI talk to customers for me?',
+    a: 'Yes. It answers in the DM from your products, prices, and stock, then sends the payment link without you leaving the conversation.',
   },
   {
-    q: 'How do social media integrations work?',
-    a: 'You connect your Instagram Professional or WhatsApp Business account via our API. Verdaunt securely reads DMs containing order intent or invoice links and maps them back to the bank ledger when payment is received.',
+    q: 'What happens after they pay?',
+    a: 'The payment is logged automatically, inventory drops, the sale is matched to your account, and the receipt is issued into the same chat.',
   },
   {
-    q: 'Is my financial data secure?',
-    a: 'Extremely. We only request read-only access to your bank feeds. We cannot move your money. All data is encrypted at rest using AES-256 and in transit via TLS 1.3.',
+    q: 'Can I run more than one shop?',
+    a: 'Yes. Each shop gets a subaccount, with its own inbox, inventory, and books, under the same login.',
+  },
+  {
+    q: 'Do I have to change the accounts I already use?',
+    a: 'No. You connect the bank and chat accounts you already have, and you book delivery from inside Verdaunt.',
+  },
+  {
+    q: 'What if someone adds items and doesn’t pay?',
+    a: 'Verdaunt follows up on the abandoned cart in the channel they were already using, with the payment link still attached.',
   },
 ]
-
-const steps = ['Connect your bank', 'Link WhatsApp and Instagram', 'Send a chat invoice', 'Match transfers automatically', 'Export for tax']
 
 export function HomePage() {
   const { openWaitlist } = useWaitlist()
@@ -48,15 +69,17 @@ export function HomePage() {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_80%_0%,rgba(184,230,143,0.22),transparent_46%)]" />
         <div className="relative mx-auto max-w-6xl">
           <h1 className="max-w-4xl text-[2.75rem] leading-[1.02] font-semibold tracking-[-0.045em] text-mist md:text-[4.25rem]">
-            <span className="sr-only">Financial clarity in your DMs, on the ledger, and at tax time.</span>
+            <span className="sr-only">
+              From the customer DM to the receipt. AI replies, the payment link goes out, and the receipt comes back.
+            </span>
             <span aria-hidden="true" className="block">
-              Financial clarity
+              From the DM to the receipt
             </span>
             <HeroRotator />
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75">
-            Automate your bookkeeping, reconcile bank transfers instantly, and send chat-friendly invoices. The
-            financial stack built specifically for Instagram, WhatsApp, and TikTok merchants.
+            A customer messages you. Verdaunt replies in the chat, sends a payment link, logs the money, updates
+            inventory, and issues the receipt after the transaction.
           </p>
           <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <HeroEmail id="hero-email" />
@@ -72,124 +95,143 @@ export function HomePage() {
       </section>
 
       <div className="rounded-t-[40px] bg-white text-ink">
-        <section id="product" className="mx-auto max-w-6xl px-5 py-20">
-          <h2 className="max-w-3xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
-            Get the books right in chat, on the bank, and at tax time.
+        <section id="workflow" className="mx-auto max-w-6xl px-5 py-20">
+          <p className="text-sm font-semibold tracking-[0.16em] text-muted uppercase">How it works</p>
+          <h2 className="mt-3 max-w-3xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
+            One path, from the first message to the receipt.
           </h2>
-          <div className="mt-14 space-y-16">
+          <ol className="mt-12 grid gap-4 md:grid-cols-5">
+            {workflow.map(([title, body], index) => (
+              <li key={title} className="rounded-3xl bg-sand p-5">
+                <p className="text-sm font-semibold text-muted">0{index + 1}</p>
+                <h3 className="mt-3 font-semibold">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">{body}</p>
+              </li>
+            ))}
+          </ol>
+        </section>
+
+        <section id="product" className="mx-auto max-w-6xl px-5 pb-20">
+          <div className="space-y-16">
+            <div id="ai">
+              <Shot
+                title="AI in the DM"
+                body="The AI reads the message, checks what you have in stock, and answers in the chat. It can take the order without you typing a reply."
+              >
+                <DmThread />
+              </Shot>
+            </div>
             <Shot
-              title="In your DMs"
-              body="Never leave the chat to type an invoice link. Verdaunt reads the message, checks stock, and drops a checkout card into WhatsApp, Instagram, and Messenger."
+              title="The payment link, then the receipt"
+              body="A payment link goes out in the same conversation. When the customer pays, Verdaunt logs it and issues the receipt back into the chat."
             >
-              <DmThread />
+              <div className="grid items-start gap-4 md:grid-cols-2">
+                <ChatInvoice />
+                <ReceiptCard />
+              </div>
             </Shot>
-            <Shot
-              title="On the bank"
-              body="Mono Connect listens to the bank switch. The moment cash arrives, the narration is matched to the invoice and the books move on their own."
-            >
-              <Ledger />
-            </Shot>
-            <Shot
-              title="At tax time"
-              body="Snap a supplier receipt or forward an email. Line items, VAT, and totals are extracted, then grouped for the FIRS TaxPro Max portal."
-            >
-              <ReceiptCard />
-            </Shot>
+            <div id="inventory">
+              <Shot
+                title="Inventory reconciles with the account"
+                body="The sale that just happened in chat is the same sale on your stock count and on your bank. You do not enter it twice."
+              >
+                <Ledger />
+              </Shot>
+            </div>
           </div>
         </section>
 
-        <section className="bg-sand">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:grid-cols-2">
+        <section id="features" className="bg-sand">
+          <div className="mx-auto max-w-6xl px-5 py-20">
+            <h2 className="max-w-3xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
+              The shop keeps running after the sale.
+            </h2>
+            <div className="mt-12 grid gap-4 md:grid-cols-2">
+              {shopRuns.map((item) => (
+                <article key={item.title} className="rounded-3xl bg-white p-6">
+                  <h3 className="text-2xl font-semibold tracking-tight">{item.title}</h3>
+                  <p className="mt-3 leading-relaxed text-muted">{item.body}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="connect" className="border-t border-line">
+          <div className="mx-auto grid max-w-6xl gap-12 px-5 py-20 md:grid-cols-2">
             <div>
-              <h2 className="text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
-                Hand a debtor over once.
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-muted">
-                Stop copy-pasting reminder messages. Verdaunt follows up on WhatsApp, SMS, and voice, politely at first
-                and firmer as the date slips, with a payment link in every message until the transfer lands.
+              <h2 className="text-4xl font-semibold tracking-[-0.04em]">Use the accounts you already have.</h2>
+              <p className="mt-4 text-lg leading-relaxed text-muted">
+                Connect the bank and the chat apps you sell on today. Verdaunt reads them. You do not open a new
+                account to get paid or to talk to customers.
               </p>
-              <ol className="mt-8 divide-y divide-line rounded-3xl bg-white">
-                {[
-                  ['Day 1', 'Gentle WhatsApp nudge'],
-                  ['Day 3', 'SMS follow-up'],
-                  ['Day 5', 'Paid · +₦45,000'],
-                ].map(([day, label]) => (
-                  <li key={day} className="flex items-center justify-between px-5 py-4">
-                    <span>
-                      <span className="mr-3 text-xs font-semibold tracking-wide text-muted uppercase">{day}</span>
-                      {label}
-                    </span>
-                    {label.startsWith('Paid') ? (
-                      <span className="rounded-full bg-lime px-2 py-0.5 text-xs font-semibold text-night">Matched</span>
-                    ) : (
-                      <span className="text-sm text-muted">Sent</span>
-                    )}
+              <div className="mt-8 grid gap-8 sm:grid-cols-2">
+                <IntegrationGroup title="Chats" items={['WhatsApp', 'Instagram', 'Facebook', 'SMS']} />
+                <IntegrationGroup title="Accounts" items={['GTBank', 'Access', 'Zenith', 'Kuda', 'Opay', 'Mono']} />
+              </div>
+            </div>
+            <div className="rounded-3xl bg-sand p-6">
+              <h3 className="text-2xl font-semibold tracking-tight">Delivery, booked in the app</h3>
+              <p className="mt-3 leading-relaxed text-muted">
+                When the order is paid, book the delivery service you already use without leaving Verdaunt. The
+                customer gets the update in the same chat as the receipt.
+              </p>
+              <ol className="mt-6 space-y-3 text-sm">
+                {['Order paid', 'Rider booked', 'Tracking sent in the DM'].map((item, index) => (
+                  <li key={item} className="flex items-center gap-3 rounded-2xl bg-white px-4 py-3">
+                    <span className="text-xs font-semibold text-muted">0{index + 1}</span>
+                    <span className="font-medium">{item}</span>
                   </li>
                 ))}
               </ol>
             </div>
-            <ChatInvoice />
           </div>
         </section>
 
-        <section className="mx-auto max-w-6xl px-5 py-20">
-          <h2 className="max-w-2xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
-            Founders focus on growth. We handle the ledger.
-          </h2>
-          <div className="mt-12 grid gap-10 md:grid-cols-2">
-            <Quote
-              quote="Before Verdaunt, I spent my Sunday evenings matching bank alerts to Instagram DMs. Now, it happens instantly while I sleep."
-              name="Sarah Jenkins"
-              role="Founder, Aura Apparel"
-            />
-            <Quote
-              quote="The WhatsApp invoices are a game changer. Customers see the total, click the link, and pay. When the payment hits, Verdaunt logs it as revenue."
-              name="David Chen"
-              role="Owner, Kismet Supply"
-            />
-          </div>
-        </section>
-
-        <section id="features" className="border-t border-line">
+        <section id="marketing" className="border-t border-line">
           <div className="mx-auto max-w-6xl px-5 py-20">
-            <h2 className="text-4xl font-semibold tracking-[-0.04em] md:text-5xl">Verdaunt gives you more.</h2>
-            <p className="mt-3 text-lg text-muted">Everything else a social seller needs, in the same login.</p>
-            <ul className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
-              {capabilities.map(([title, body]) => (
-                <li key={title}>
-                  <h3 className="font-semibold">{title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted">{body}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        <section className="border-t border-line">
-          <div className="mx-auto max-w-6xl px-5 py-20">
-            <h2 className="text-4xl font-semibold tracking-[-0.04em]">Integrations</h2>
-            <p className="mt-3 max-w-xl text-lg text-muted">
-              Connect the banks and chats you already use. Direct integrations with GTBank, Access, and 5,000+ others.
-            </p>
-            <div className="mt-10 grid gap-8 sm:grid-cols-3">
-              <IntegrationGroup title="Chats" items={['WhatsApp', 'Instagram DMs', 'Messenger', 'SMS']} />
-              <IntegrationGroup title="Banks" items={['GTBank', 'Access', 'Zenith', 'Kuda', 'Opay']} />
-              <IntegrationGroup title="Open banking" items={['Mono', 'Plaid', 'Tink']} />
+            <h2 className="max-w-3xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
+              Bring the customer back, and keep the ones who almost paid.
+            </h2>
+            <div className="mt-12 grid gap-4 md:grid-cols-2">
+              <article className="rounded-3xl bg-sand p-6">
+                <h3 className="text-2xl font-semibold tracking-tight">Loyalty, rewards, and referrals</h3>
+                <p className="mt-3 leading-relaxed text-muted">
+                  Points for repeat buyers, a reward they can spend, and a referral they can send to a friend. Verdaunt
+                  tracks who came back and who they brought.
+                </p>
+              </article>
+              <article className="rounded-3xl bg-night p-6 text-mist">
+                <h3 className="text-2xl font-semibold tracking-tight">Abandoned carts get a follow-up</h3>
+                <p className="mt-3 leading-relaxed text-white/70">
+                  Someone added items and went quiet. Verdaunt messages them in the channel they used, with the payment
+                  link still on the order, so the sale is not lost.
+                </p>
+                <p className="mt-6 rounded-2xl bg-white/10 px-4 py-3 text-sm">
+                  “You left 2 dresses in the bag. Pay here and we’ll send them today.”
+                </p>
+              </article>
             </div>
           </div>
         </section>
 
         <section className="border-t border-line">
           <div className="mx-auto max-w-6xl px-5 py-20">
-            <h2 className="text-4xl font-semibold tracking-[-0.04em]">It’s easy to get started</h2>
-            <ol className="mt-10 grid gap-4 sm:grid-cols-5">
-              {steps.map((step, index) => (
-                <li key={step} className="rounded-3xl bg-sand p-5">
-                  <p className="text-sm font-semibold text-muted">0{index + 1}</p>
-                  <p className="mt-3 font-semibold">{step}</p>
-                </li>
-              ))}
-            </ol>
+            <h2 className="max-w-2xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-5xl">
+              Shops stay in the chat. Verdaunt finishes the sale.
+            </h2>
+            <div className="mt-12 grid gap-10 md:grid-cols-2">
+              <Quote
+                quote="Before Verdaunt, I spent my Sunday evenings matching bank alerts to Instagram DMs. Now, it happens instantly while I sleep."
+                name="Sarah Jenkins"
+                role="Founder, Aura Apparel"
+              />
+              <Quote
+                quote="The WhatsApp invoices are a game changer. Customers see the total, click the link, and pay. When the payment hits, Verdaunt logs it as revenue."
+                name="David Chen"
+                role="Owner, Kismet Supply"
+              />
+            </div>
           </div>
         </section>
 
@@ -214,9 +256,11 @@ export function HomePage() {
         <section className="bg-night text-mist">
           <div className="mx-auto max-w-6xl px-5 py-24">
             <h2 className="max-w-xl text-4xl leading-tight font-semibold tracking-[-0.04em] md:text-6xl">
-              Start reconciling in seconds, not hours.
+              Let the DM finish as a receipt.
             </h2>
-            <p className="mt-4 text-white/70">No credit card required. 14-day free trial on premium features.</p>
+            <p className="mt-4 max-w-lg text-white/70">
+              AI in the chat, the payment logged, inventory updated, and the receipt issued. No credit card required.
+            </p>
             <div className="mt-8">
               <HeroEmail id="closing-email" />
             </div>

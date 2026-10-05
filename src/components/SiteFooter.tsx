@@ -23,9 +23,10 @@ export function SiteFooter() {
           </div>
 
           <FooterColumn title="Product">
-            <a href={homeHref('#product')}>Reconciliation</a>
-            <a href={homeHref('#invoicing')}>Invoicing</a>
-            <a href={homeHref('#features')}>Receipt OCR</a>
+            <a href={homeHref('#workflow')}>DM to receipt</a>
+            <a href={homeHref('#ai')}>AI in the DM</a>
+            <a href={homeHref('#inventory')}>Inventory</a>
+            <a href={homeHref('#features')}>Features</a>
             <button type="button" onClick={openWaitlist}>
               Integrations
             </button>
