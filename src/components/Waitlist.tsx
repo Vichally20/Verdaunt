@@ -9,7 +9,7 @@ import {
 } from 'react'
 
 const GOOGLE_SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbzvZfETBCaaUsOjmx66Jzjz61skLRor3wefML82jk5vc0sEGvh38aKme8yVBgprDsAj/exec'
+  'https://script.google.com/macros/s/AKfycbx4WJn9_Cx34M3EQiqA9hayU6JPoAAbXLZ4ZQ4e0mOdE5uBY4FB9CI2FjAE7SdyixQx/exec'
 
   export async function submitWaitlistEmail(email: string) {
     await fetch(GOOGLE_SCRIPT_URL, {
