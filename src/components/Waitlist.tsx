@@ -11,15 +11,16 @@ import {
 const GOOGLE_SCRIPT_URL =
   'https://script.google.com/macros/s/AKfycbzvZfETBCaaUsOjmx66Jzjz61skLRor3wefML82jk5vc0sEGvh38aKme8yVBgprDsAj/exec'
 
-export async function submitWaitlistEmail(email: string) {
-  const formData = new FormData()
-  formData.append('email', email)
-  await fetch(GOOGLE_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: formData,
-  })
-}
+  export async function submitWaitlistEmail(email: string) {
+    await fetch(GOOGLE_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({ email: email }),
+    })
+  }
 
 type WaitlistContextValue = {
   openWaitlist: () => void
